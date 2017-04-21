@@ -1,0 +1,91 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+	<ui:composition template="/WEB-INF/plantilla/templateCliente.xhtml">
+		<ui:define name="body">
+			<f:view>
+
+				<h:form>
+					<p:panel header="Modulo Traslado De Dinero" id="moduloTraslado">
+
+						<p:growl />
+
+						<h:panelGrid columns="2" border="0">
+
+							<p:outputLabel value="Lista De Cuentas (Origen)" />
+							<p:selectOneMenu id="listaCuentasD"
+								binding="#{moduloTrasladoVista.menuCuentasOrigen}">
+								<f:selectItem itemValue="-1"
+									itemLabel="--SELECCIONE UNA CUENTA-" />
+								<f:selectItems value="#{moduloTrasladoVista.cuentasCliente}" />
+								<p:ajax
+									listener="#{moduloTrasladoVista.txtCuentaOrigenListener}"
+									update="moduloTraslado" />
+							</p:selectOneMenu>
+
+							<p:outputLabel value="Estado Cuenta Origen" />
+							<p:inputText id="txtCtaOrigenEstado" disabled="true"
+								placeholder="S/N/C"
+								binding="#{moduloTrasladoVista.txtCtaOrigenEstado}" />
+
+							<p:outputLabel value="Saldo Cuenta Origen" />
+							<p:inputText id="txtCtaOrigenSaldo" disabled="true"
+								placeholder="S/N/C"
+								binding="#{moduloTrasladoVista.txtCtaOrigenSaldo}" />
+
+							<p:outputLabel value="Cuentas Registradas (Destino)" />
+							<p:selectOneMenu id="listaCuentasE"
+								binding="#{moduloTrasladoVista.menuCuentasRegistradas}">
+								<f:selectItem itemValue="-1"
+									itemLabel="--SELECCIONE UNA CUENTA-" />
+								<f:selectItems
+									value="#{moduloTrasladoVista.cuentasClienteRegistradas}" />
+								<p:ajax
+									listener="#{moduloTrasladoVista.txtCuentaDestinoListener}"
+									update="moduloTraslado" />
+							</p:selectOneMenu>
+
+							<p:outputLabel value="Estado Cuenta Destino" />
+							<p:inputText id="txtCtaDestinoEstado" disabled="true"
+								placeholder="S/N/C"
+								binding="#{moduloTrasladoVista.txtCtaDestinoEstado}" />
+
+							<p:outputLabel value="Saldo Cuenta Destino" />
+							<p:inputText id="txtCtaDestinoSaldo" disabled="true"
+								placeholder="S/N/C"
+								binding="#{moduloTrasladoVista.txtCtaDestinoSaldo}" />
+
+							<p:outputLabel value="Valor" />
+							<p:inputText id="txtValor" placeholder="$$$"
+								binding="#{moduloTrasladoVista.txtValor}" />
+
+							<p:outputLabel value="Descripción" />
+							<p:inputText id="txtDescripcion" placeholder="... ... ..."
+								binding="#{moduloTrasladoVista.txtDescripcion}" />
+
+							<p:commandButton disabled="true" id="btnTrasladar"
+								value="Generar Traslado"
+								binding="#{moduloTrasladoVista.btnTrasladar}"
+								action="#{moduloTrasladoVista.generarTraslado}"
+								update="moduloTraslado" />
+							<p:outputLabel
+								value="**Valor Por Traslado: $1000. Se Retiran de la Cuenta Origen**" />
+
+						</h:panelGrid>
+
+					</p:panel>
+
+				</h:form>
+			</f:view>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

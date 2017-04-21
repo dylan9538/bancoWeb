@@ -1,0 +1,45 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+
+	<h:form>
+
+		<p:panel header="Bienvenido - Servicios Para Clientes - Banco Bryan S.A." id="moduloMenuCliente">
+
+			<p:growl />
+
+			<p:menubar>
+
+					<p:menuitem value="Traslado Entre Cuentas"
+						url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/final_moduloTrasladoDinero.xhtml" />
+
+					<p:menuitem value="Cambiar Clave Cuenta"
+						url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/final_moduloCambioClave.xhtml" />
+
+					<p:menuitem value="Mis Datos y Mis Cuentas"
+						url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/final_moduloInformacionPersonal.xhtml" />
+
+					<p:menuitem value="Registro de Cuentas T"
+						url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/final_moduloRegistroCuentasT.xhtml" />
+				
+					<p:menuitem value="Reiniciar Sesión"
+						url="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/login.xhtml" />
+				
+				
+			</p:menubar>
+
+
+		</p:panel>
+
+	</h:form>
+
+</h:body>
+</html>

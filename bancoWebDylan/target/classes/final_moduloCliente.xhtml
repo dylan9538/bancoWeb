@@ -1,0 +1,116 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+	<ui:composition template="/WEB-INF/plantilla/templateUser.xhtml">
+		<ui:define name="body">
+			<f:view>
+				<h:form>
+
+					<p:panel header="Modulo Cliente" id="moduloCliente">
+
+						<p:growl />
+
+						<h:panelGrid columns="2" border="0">
+
+							<p:outputLabel value="Identificación" />
+							<p:inputText id="txtCliId"
+								placeholder="$Identificacièn del Cliente"
+								binding="#{moduloClienteVista.txtClienteId}">
+								<p:ajax
+									listener="#{moduloClienteVista.txtIdentificacionListener}"
+									update="moduloCliente" />
+							</p:inputText>
+
+							<p:outputLabel value="Tipo Documento" />
+							<p:selectOneMenu id="listaTipoDocumentosA"
+								binding="#{moduloClienteVista.menuTiposDocumentos}">
+								<f:selectItem itemValue="-1"
+									itemLabel="--SELECCIONE UN TIPO DE DOCUMENTO--" />
+								<f:selectItems
+									value="#{moduloClienteVista.losItemsTipoDocumento}" />
+							</p:selectOneMenu>
+
+							<p:outputLabel value="Nombre" />
+							<p:inputText id="txtCliNombre" placeholder="Nombre y Apellidos"
+								binding="#{moduloClienteVista.txtClienteNombre}" />
+
+							<p:outputLabel value="Dirección" />
+							<p:inputText id="txtCliDireccion" placeholder="Calle N No. A-BC"
+								binding="#{moduloClienteVista.txtClienteDireccion}" />
+
+							<p:outputLabel value="Telefono" />
+							<p:inputText id="txtCliTelefono" placeholder="### #### ####"
+								binding="#{moduloClienteVista.txtClienteTelefono}" />
+
+							<p:outputLabel value="Correo Electrónico" />
+							<p:inputText id="txtCliEmail"
+								placeholder="Ej: correo@dominio.com"
+								binding="#{moduloClienteVista.txtClienteEmail}" />
+
+						</h:panelGrid>
+
+						<h:panelGrid columns="3" border="0">
+
+							<p:commandButton disabled="true" id="btnRegistrarCliente"
+								update="pnlListaClientes" value="Registrar Cliente"
+								binding="#{moduloClienteVista.btnCrear}"
+								action="#{moduloClienteVista.crearAction}" />
+							<p:commandButton disabled="true" id="btnActualizarCliente"
+								update="pnlListaClientes" value="Actualizar Cliente"
+								binding="#{moduloClienteVista.btnModificar}"
+								action="#{moduloClienteVista.modificarAction}" />
+							<p:commandButton id="btnLimpiarCliForm" update="moduloCliente"
+								value="Limpiar Formulario"
+								binding="#{moduloClienteVista.btnBorrar}"
+								action="#{moduloClienteVista.limpiarAction}" />
+
+						</h:panelGrid>
+
+					</p:panel>
+
+					<p:panel id="pnlListaClientes" header="Lista de Clientes">
+
+						<p:dataTable value="#{moduloClienteVista.losClientes}"
+							var="cliente" paginator="true" rows="5"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="5,10,15">
+							<p:column headerText="Identificacion" filterBy="#{cliente.cliId}">
+								<p:outputLabel value="#{cliente.cliId}" />
+							</p:column>
+
+							<p:column headerText="Nombre" filterBy="#{cliente.cliNombre}">
+								<p:outputLabel value="#{cliente.cliNombre}" />
+							</p:column>
+
+							<p:column headerText="Direccion"
+								filterBy="#{cliente.cliDireccion}">
+								<p:outputLabel value="#{cliente.cliDireccion}" />
+							</p:column>
+
+							<p:column headerText="Teléfono" filterBy="#{cliente.cliTelefono}">
+								<p:outputLabel value="#{cliente.cliTelefono}" />
+							</p:column>
+
+							<p:column headerText="E-Mail" filterBy="#{cliente.cliMail}">
+								<p:outputLabel value="#{cliente.cliMail}" />
+							</p:column>
+
+
+						</p:dataTable>
+
+					</p:panel>
+
+				</h:form>
+			</f:view>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

@@ -1,0 +1,71 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+	<ui:composition template="/WEB-INF/plantilla/templateCliente.xhtml">
+		<ui:define name="body">
+			<f:view>
+				<h:form>
+
+					<p:panel header="Modulo Registro De Cuentas" id="moduloRegistroCT">
+
+						<p:growl />
+
+						<h:panelGrid columns="2" border="0">
+
+							<p:outputLabel value="No. Identificación" />
+							<p:inputText id="txtNoIdentificacion"
+								binding="#{moduloRCTVista.txtNoIdentificacion}">
+								<p:ajax listener="#{moduloRCTVista.txtCedulaListener}"
+									update="btnAsociar" />
+							</p:inputText>
+
+							<p:outputLabel value="Tipo Documento" />
+							<p:selectOneMenu id="listaTipoDocumentosB"
+								binding="#{moduloRCTVista.menuTiposDocumentos}">
+								<f:selectItem itemValue="-1"
+									itemLabel="--SELECCIONE UN TIPO DE DOCUMENTO--" />
+								<f:selectItems value="#{moduloRCTVista.losItemsTipoDocumento}" />
+							</p:selectOneMenu>
+
+							<p:outputLabel value="No. Cuenta" />
+							<p:inputText id="txtNoCuenta" placeholder="#"
+								binding="#{moduloRCTVista.txtNoCuenta}">
+								<p:ajax listener="#{moduloRCTVista.txtNoCuentaListener}"
+									update="btnAsociar" />
+							</p:inputText>
+
+							<p:outputLabel value="Descripción!" />
+							<p:inputText id="txtDescripcion"
+								binding="#{moduloRCTVista.txtDescripcion}" />
+
+							<p:outputLabel value="Registradas" />
+							<p:selectOneMenu id="listaRegistradas"
+								binding="#{moduloRCTVista.menuRegistradas}">
+								<f:selectItem itemValue="-1"
+									itemLabel="--SELECCIONE UN TIPO DE DOCUMENTO--" />
+								<f:selectItems value="#{moduloRCTVista.listaRegistradas}" />
+							</p:selectOneMenu>
+
+							<p:commandButton disabled="true" id="btnAsociar"
+								update="moduloRegistroCT" value="Asociar Cuenta"
+								binding="#{moduloRCTVista.btnAsociar}"
+								action="#{moduloRCTVista.asociarCuenta}" />
+
+						</h:panelGrid>
+
+					</p:panel>
+
+				</h:form>
+			</f:view>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

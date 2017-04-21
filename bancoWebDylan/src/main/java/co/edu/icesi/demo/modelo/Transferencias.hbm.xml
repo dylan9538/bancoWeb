@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 6/11/2016 08:36:06 PM by Hibernate Tools 5.1.0.Beta1 -->
+<hibernate-mapping>
+    <class name="co.edu.icesi.demo.modelo.Transferencias" table="transferencias" schema="public" optimistic-lock="version">
+        <id name="trasCodigo" type="long">
+            <column name="tras_codigo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="clientes" class="co.edu.icesi.demo.modelo.Clientes" fetch="select">
+            <column name="cli_id" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="cuentasByCueNumeroDestino" class="co.edu.icesi.demo.modelo.Cuentas" fetch="select">
+            <column name="cue_numero_destino" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="cuentasByCueNumeroOrigen" class="co.edu.icesi.demo.modelo.Cuentas" fetch="select">
+            <column name="cue_numero_origen" length="30" not-null="true" />
+        </many-to-one>
+        <property name="trasValor" type="big_decimal">
+            <column name="tras_valor" precision="10" not-null="true" />
+        </property>
+        <property name="trasFecha" type="timestamp">
+            <column name="tras_fecha" length="29" not-null="true" />
+        </property>
+        <property name="trasDescripcion" type="string">
+            <column name="tras_descripcion" length="100" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

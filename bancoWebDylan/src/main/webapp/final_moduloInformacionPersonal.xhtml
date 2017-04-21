@@ -1,0 +1,160 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+	<ui:composition template="/WEB-INF/plantilla/templateCliente.xhtml">
+		<ui:define name="body">
+			<f:view>
+
+				<h:form>
+
+					<p:panel header="Modulo Información Personal" id="moduloIP">
+
+						<p:growl />
+
+						<h:panelGrid columns="2" border="0">
+
+							<p:outputLabel value="Identificación" />
+							<p:inputText id="txtCliId" disabled="true"
+								binding="#{moduloInfoPersonalVista.txtCliId}"
+								value="#{moduloInfoPersonalVista.clienteLogueado.cliId}" />
+
+							<p:outputLabel value="Tipo Documento" />
+							<p:inputText id="txtTipoDoc" disabled="true"
+								binding="#{moduloInfoPersonalVista.txtTipoDoc}"
+								value="#{moduloInfoPersonalVista.tipoDocumento}" />
+
+							<p:outputLabel value="Nombre" />
+							<p:inputText id="txtCliNombre" disabled="true"
+								binding="#{moduloInfoPersonalVista.txtCliNombre}"
+								value="#{moduloInfoPersonalVista.clienteLogueado.cliNombre}" />
+
+							<p:outputLabel value="Dirección" />
+							<p:inputText id="txtCliDireccion"
+								binding="#{moduloInfoPersonalVista.txtCliDireccion}"
+								value="#{moduloInfoPersonalVista.clienteLogueado.cliDireccion}" />
+
+							<p:outputLabel value="Telefono" />
+							<p:inputText id="txtCliTelefono"
+								binding="#{moduloInfoPersonalVista.txtCliTelefono}"
+								value="#{moduloInfoPersonalVista.clienteLogueado.cliTelefono}" />
+
+							<p:outputLabel value="Correo Electrónico" />
+							<p:inputText id="txtCliEmail"
+								binding="#{moduloInfoPersonalVista.txtCliEmail}"
+								value="#{moduloInfoPersonalVista.clienteLogueado.cliMail}" />
+
+							<p:outputLabel value="Mis Cuentas" />
+							<p:selectOneMenu id="misCuentas"
+								binding="#{moduloInfoPersonalVista.menuCuentas}">
+								<f:selectItem itemValue="-1"
+									itemLabel="--SELECCIONE UNA CUENTA--" />
+								<f:selectItems value="#{moduloInfoPersonalVista.listaCuentas}" />
+								<p:ajax
+									listener="#{moduloInfoPersonalVista.txtMenuCuentasListener}"
+									update="pnlListaRetiros,pnlListaConsignaciones,pnlListaTraslados,
+						moduloIP" />
+							</p:selectOneMenu>
+
+							<p:outputLabel value="Saldo" />
+							<p:inputText id="txtSaldoCue"
+								binding="#{moduloInfoPersonalVista.txtSaldoCue}" disabled="true" />
+
+							<p:commandButton id="btnActualizarDatos" value="Actualizar Datos"
+								binding="#{moduloInfoPersonalVista.btnActualizarDatos}"
+								action="#{moduloInfoPersonalVista.actualizarAction}" />
+
+
+
+						</h:panelGrid>
+
+					</p:panel>
+
+					<p:panel id="pnlListaRetiros" header="Lista de Retiros">
+
+						<p:dataTable value="#{moduloInfoPersonalVista.retiros}"
+							var="retActual" paginator="true" rows="5"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="5,10,15">
+
+							<p:column headerText="Fecha">
+								<p:outputLabel value="#{retActual.retFecha }" />
+							</p:column>
+
+							<p:column headerText="Valor">
+								<p:outputLabel value="#{retActual.retValor }" />
+							</p:column>
+
+							<p:column headerText="Descripción">
+								<p:outputLabel value="#{retActual.retDescripcion }" />
+							</p:column>
+
+						</p:dataTable>
+
+					</p:panel>
+
+					<p:panel id="pnlListaConsignaciones"
+						header="Lista de Consignaciones">
+
+						<p:dataTable value="#{moduloInfoPersonalVista.consignaciones}"
+							var="conActual" paginator="true" rows="5"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="5,10,15">
+
+							<p:column headerText="Fecha">
+								<p:outputLabel value="#{conActual.conFecha }" />
+							</p:column>
+
+							<p:column headerText="Valor">
+								<p:outputLabel value="#{conActual.conValor }" />
+							</p:column>
+
+							<p:column headerText="Descripción">
+								<p:outputLabel value="#{conActual.conDescripcion }" />
+							</p:column>
+
+						</p:dataTable>
+
+					</p:panel>
+
+					<p:panel id="pnlListaTraslados" header="Lista de Transferencias">
+
+						<p:dataTable value="#{moduloInfoPersonalVista.transferencias}"
+							var="tActual" paginator="true" rows="5"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="5,10,15">
+
+							<p:column headerText="Cuenta Origen">
+								<p:outputLabel
+									value="#{tActual.cuentasByCueNumeroOrigen.cueNumero }" />
+							</p:column>
+
+							<p:column headerText="Fecha">
+								<p:outputLabel value="#{tActual.trasFecha }" />
+							</p:column>
+
+							<p:column headerText="Valor">
+								<p:outputLabel value="#{tActual.trasValor }" />
+							</p:column>
+
+							<p:column headerText="Descripción">
+								<p:outputLabel value="#{tActual.trasDescripcion }" />
+							</p:column>
+
+						</p:dataTable>
+
+					</p:panel>
+
+				</h:form>
+			</f:view>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

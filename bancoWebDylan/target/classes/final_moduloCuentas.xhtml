@@ -1,0 +1,87 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+	<ui:composition template="/WEB-INF/plantilla/templateUser.xhtml">
+		<ui:define name="body">
+			<f:view>
+				<h:form>
+
+					<p:panel header="Modulo Cuentas" id="moduloCuentas">
+
+						<p:growl />
+
+						<h:panelGrid columns="1" border="0">
+
+							<p:panel header="Registro De Cuentas" id="moduloRegitroCuentas">
+								<h:panelGrid columns="3" border="0">
+									<p:outputLabel value="Id. Cliente" />
+									<p:inputText id="txtCliId" placeholder="Identificación"
+										binding="#{moduloCuentaVista.txtClienteId}">
+										<p:ajax listener="#{moduloCuentaVista.txtCedulaListener}"
+											update="moduloCuentas" />
+									</p:inputText>
+
+									<p:commandButton id="btnGenerarCuenta" value="Generar Cuenta"
+										binding="#{moduloCuentaVista.btnGenerar}"
+										action="#{moduloCuentaVista.generarCuentaAction}"
+										update="moduloCuentas" />
+								</h:panelGrid>
+							</p:panel>
+
+							<p:panel header="Activación De Cuentas"
+								id="moduloActivacionCuentas">
+								<h:panelGrid columns="2" border="0">
+
+									<p:outputLabel value="Lista De Cuentas" />
+									<p:selectOneMenu id="listaCuentasA"
+										binding="#{moduloCuentaVista.menuCuentas}">
+										<f:selectItem itemValue="-1"
+											itemLabel="--SELECCIONE UNA CUENTA--" />
+										<f:selectItems value="#{moduloCuentaVista.cuentasCliente}" />
+
+										<p:ajax listener="#{moduloCuentaVista.txtMenuCuentasListener}"
+											update="moduloCuentas" />
+									</p:selectOneMenu>
+
+									<p:outputLabel value="Estado" />
+									<p:inputText id="txtEstado" disabled="true" placeholder="S/N/C"
+										binding="#{moduloCuentaVista.txtEstadoCuenta}" />
+
+
+									<p:inputText id="txtCuentaGenerada" disabled="true"
+										placeholder="..."
+										binding="#{moduloCuentaVista.txtCuentaGenerada}" />
+
+								</h:panelGrid>
+							</p:panel>
+
+							<h:panelGrid columns="3" border="0">
+								<p:commandButton id="btnActivar" value="Activar Cuenta"
+									binding="#{moduloCuentaVista.btnActivar}"
+									action="#{moduloCuentaVista.activarCuentaAction}"
+									update="moduloCuentas" />
+								<p:commandButton id="btnDesactivar" value="Desactivar Cuenta"
+									binding="#{moduloCuentaVista.btnDesacivar}"
+									action="#{moduloCuentaVista.desactivarCuentaAction}"
+									update="moduloCuentas" />
+							</h:panelGrid>
+
+						</h:panelGrid>
+
+
+					</p:panel>
+
+				</h:form>
+			</f:view>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

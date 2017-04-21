@@ -1,0 +1,59 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+	<ui:composition template="/WEB-INF/plantilla/templateCliente.xhtml">
+		<ui:define name="body">
+			<f:view>
+
+				<h:form>
+
+					<p:panel header="Modulo Cambio de Contraseña"
+						id="moduloCambioClave">
+
+						<p:growl />
+
+						<h:panelGrid columns="2" border="0">
+
+							<p:outputLabel value="Lista De Cuentas" />
+							<p:selectOneMenu id="listaCuentasB"
+								binding="#{moduloCambioClaveVista.menuCuentas}">
+								<f:selectItem itemValue="-1"
+									itemLabel="--SELECCIONE UNA CUENTA-" />
+								<f:selectItems value="#{moduloCambioClaveVista.losItemsCuentas}" />
+							</p:selectOneMenu>
+
+							<p:outputLabel value="Clave Actual" />
+							<p:inputText id="txtActual" placeholder="* * * * "
+								binding="#{moduloCambioClaveVista.txtClaveActual}" />
+
+							<p:outputLabel value="Nueva Clave" />
+							<p:inputText id="txtNueva" placeholder="* * * *"
+								binding="#{moduloCambioClaveVista.txtClaveNueva}" />
+
+							<p:outputLabel value="Confirmar Nueva Clave" />
+							<p:inputText id="txtConfirmar" placeholder="* * * *"
+								binding="#{moduloCambioClaveVista.txtClaveConfirmada}" />
+
+							<p:commandButton update="moduloCambioClave" id="btnCambiarClave"
+								value="Actualizar Password"
+								action="#{moduloCambioClaveVista.actualizarClaveAction}" />
+
+						</h:panelGrid>
+
+
+					</p:panel>
+
+				</h:form>
+			</f:view>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

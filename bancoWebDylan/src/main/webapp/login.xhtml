@@ -1,0 +1,76 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>Login Banco</title>
+	<meta name="content-type" content="text/html; charset=UTF-8" />
+</h:head>
+<h:body>
+	<h:form>
+		<p:panel header="Iniciar Sesión" id="moduloLogin">
+
+			<p:growl id="msgGrowl" autoUpdate="true" showDetail="false" />
+
+			<h:panelGrid columns="1" border="0">
+
+				<p:panel header="Como Usuario/Colaborador!" id="moduloLoginUsuario">
+
+					<h:panelGrid columns="2" border="0">
+
+						<p:outputLabel value="Nombre Usuario" />
+
+						<p:inputText id="usernameField" name="j_username"
+							value="#{loginVista.userId}" placeholder="username" />
+
+						<p:outputLabel value="Contraseña" />
+
+						<p:password id="passwordField" name="j_password"
+							value="#{loginVista.password}" placeholder="****"
+							feedback="false" />
+
+						<p:commandButton value="Log In Usuario!"
+							action="#{loginVista.loginComoColaborador}" update="msgGrowl" />
+
+					</h:panelGrid>
+				</p:panel>
+
+				<p:panel header="Como Cliente!" id="moduloLoginCliente">
+
+					<h:panelGrid columns="2" border="0">
+
+						<p:outputLabel value="Cedula Cliente" />
+						<p:inputText id="cedulaCliente" placeholder="x.xxx.xxx.xxx"
+							binding="#{loginVista.txtCedulaCliente}">
+							<p:ajax listener="#{loginVista.txtCedulaListener}"
+								update="moduloLoginCliente" />
+						</p:inputText>
+
+						<p:outputLabel value="Lista De Cuentas" />
+						<p:selectOneMenu id="listaCuentasBB"
+							binding="#{loginVista.menuCuentas}">
+							<f:selectItem itemValue="-1" itemLabel="--SELECCIONE UNA CUENTA-" />
+							<f:selectItems value="#{loginVista.cuentasCliente}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="Clave Cuenta" />
+						<p:inputText id="claveCuenta" placeholder="****"
+							binding="#{loginVista.txtClaveCuentaCliente}" />
+
+						<p:commandButton value="Log In Cliente!"
+							action="#{loginVista.loginComoCliente}" update="msgGrowl" />
+
+					</h:panelGrid>
+
+				</p:panel>
+
+
+			</h:panelGrid>
+
+
+
+		</p:panel>
+	</h:form>
+</h:body>
+</html>

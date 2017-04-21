@@ -1,0 +1,79 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+	<ui:composition template="/WEB-INF/plantilla/templateUser.xhtml">
+		<ui:define name="body">
+			<f:view>
+				<h:form>
+
+					<p:panel header="Modulo Retiro Y Consignaciones" id="moduloRC">
+
+						<p:growl />
+
+						<h:panelGrid columns="2" border="0">
+
+							<p:outputLabel value="Identificación Cliente" />
+							<p:inputText id="txtCliId" placeholder="#"
+								binding="#{moduloRetiroConsignacionVista.txtCliId}">
+								<p:ajax
+									listener="#{moduloRetiroConsignacionVista.txtCedulaListener}"
+									update="moduloRC" />
+							</p:inputText>
+
+							<p:outputLabel value="Lista De Cuentas" />
+							<p:selectOneMenu id="listaCuentasB"
+								binding="#{moduloRetiroConsignacionVista.menuCuentas}">
+								<f:selectItem itemValue="-1"
+									itemLabel="--SELECCIONE UNA CUENTA-" />
+								<f:selectItems value="#{moduloRetiroConsignacionVista.cuentas}" />
+								<p:ajax
+									listener="#{moduloRetiroConsignacionVista.txtMenuListener}"
+									update="moduloRC" />
+							</p:selectOneMenu>
+
+							<p:outputLabel value="Estado Activación" />
+							<p:inputText id="txtCtaEstado" disabled="true"
+								placeholder="S/N/C"
+								binding="#{moduloRetiroConsignacionVista.txtCtaEstado}" />
+
+							<p:outputLabel value="Saldo" />
+							<p:inputText id="txtSaldo" placeholder="$$$" disabled="true"
+								binding="#{moduloRetiroConsignacionVista.txtSaldo}" />
+
+							<p:outputLabel value="Valor" />
+							<p:inputText id="txtValor" placeholder="$$$"
+								binding="#{moduloRetiroConsignacionVista.txtValor}" />
+
+
+							<p:outputLabel value="Descripción" />
+							<p:inputText id="txtDescripcion" placeholder="... ... ..."
+								binding="#{moduloRetiroConsignacionVista.txtDescripcion}" />
+
+							<p:commandButton disabled="true" id="btnConsignar"
+								value="Consignar"
+								binding="#{moduloRetiroConsignacionVista.btnConsignar}"
+								update="moduloRC"
+								action="#{moduloRetiroConsignacionVista.consignar}" />
+							<p:commandButton disabled="true" id="btnRetirar" value="Retirar"
+								binding="#{moduloRetiroConsignacionVista.btnRetirar}"
+								update="moduloRC"
+								action="#{moduloRetiroConsignacionVista.retirar}" />
+
+						</h:panelGrid>
+
+					</p:panel>
+
+				</h:form>
+			</f:view>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
